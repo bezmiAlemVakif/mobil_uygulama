@@ -1,0 +1,156 @@
+:root {
+  /* 🎨 Soft Pastel Color Palette */
+  --ion-color-primary: #8ECAC0;           /* pastel mint */
+  --ion-color-primary-rgb: 142, 202, 192;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #7DB5AC;
+  --ion-color-primary-tint: #9AD0C6;
+
+  --ion-color-secondary: #F6E9D8;         /* light cream */
+  --ion-color-secondary-rgb: 246, 233, 216;
+  --ion-color-secondary-contrast: #333;
+  --ion-color-secondary-contrast-rgb: 51, 51, 51;
+  --ion-color-secondary-shade: #DFD1C0;
+  --ion-color-secondary-tint: #F7ECDC;
+
+  --ion-color-tertiary: #FFDAD2;          /* peach pink */
+  --ion-color-tertiary-rgb: 255, 218, 210;
+  --ion-color-tertiary-contrast: #333;
+  --ion-color-tertiary-contrast-rgb: 51, 51, 51;
+  --ion-color-tertiary-shade: #E5BEA8;
+  --ion-color-tertiary-tint: #FFE0D7;
+
+  --ion-color-success: #A7D7C5;           /* soft green */
+  --ion-color-success-rgb: 167, 215, 197;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #96BDAD;
+  --ion-color-success-tint: #B0DDCC;
+
+  --ion-color-warning: #FFE9A6;           /* pastel yellow */
+  --ion-color-warning-rgb: 255, 233, 166;
+  --ion-color-warning-contrast: #333;
+  --ion-color-warning-contrast-rgb: 51, 51, 51;
+  --ion-color-warning-shade: #E5D092;
+  --ion-color-warning-tint: #FFECB3;
+
+  --ion-color-danger: #F4B9C5;            /* soft rose pink */
+  --ion-color-danger-rgb: 244, 185, 197;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #DBA4AE;
+  --ion-color-danger-tint: #F5C0CB;
+
+  --ion-color-medium: #9BA6A5;
+  --ion-color-medium-rgb: 155, 166, 165;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #889191;
+  --ion-color-medium-tint: #A5B0AF;
+
+  --ion-color-light: #F7FDFD;             /* very light blue */
+  --ion-color-light-rgb: 247, 253, 253;
+  --ion-color-light-contrast: #333;
+  --ion-color-light-contrast-rgb: 51, 51, 51;
+  --ion-color-light-shade: #DDE1E0;
+  --ion-color-light-tint: #F8FEFE;
+
+  /* Soft shadows */
+  --shadow-soft: 0 4px 15px rgba(142, 202, 192, 0.12);
+  --shadow-medium: 0 6px 20px rgba(142, 202, 192, 0.15);
+  --shadow-strong: 0 8px 30px rgba(142, 202, 192, 0.2);
+
+  /* Border radius */
+  --border-radius-sm: 12px;
+  --border-radius-md: 16px;
+  --border-radius-lg: 24px;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+
+  --ion-background-color: #FAFBFC;
+}
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  background: var(--ion-background-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ion-page {
+  --background: var(--ion-background-color);
+}
+
+/* 🎨 Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+}
+
+h1 { font-size: 28px; line-height: 1.3; }
+h2 { font-size: 24px; line-height: 1.3; }
+h3 { font-size: 20px; line-height: 1.4; }
+h4 { font-size: 18px; line-height: 1.4; }
+
+p, .text-body {
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #555;
+}
+
+.text-small { font-size: 14px; color: #888; }
+.text-label { font-size: 12px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Utility Classes */
+.card-balance {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.small-muted { 
+  color: #999; 
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.text-muted { color: #aaa; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Spacing utilities */
+.p-xs { padding: var(--spacing-xs); }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
+.p-2xl { padding: var(--spacing-2xl); }
+
+.px-lg { padding-left: var(--spacing-lg); padding-right: var(--spacing-lg); }
+.py-lg { padding-top: var(--spacing-lg); padding-bottom: var(--spacing-lg); }
+
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.mt-lg { margin-top: var(--spacing-lg); }
+
+/* Flexbox utilities */
+.flex-center { display: flex; justify-content: center; align-items: center; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.flex-col { display: flex; flex-direction: column; }
+
+/* Gradients */
+.gradient-mint { background: linear-gradient(135deg, #8ECAC0 0%, #A7D7C5 100%); }
+.gradient-peach { background: linear-gradient(135deg, #FFDAD2 0%, #FFE0D7 100%); }
+.gradient-soft { background: linear-gradient(135deg, #F7FDFD 0%, #F6E9D8 100%); }

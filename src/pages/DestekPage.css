@@ -1,0 +1,59 @@
+.destek-page {
+  --background: #FFFFFF;
+}
+
+.section {
+  margin: 24px 0;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+.destek-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.destek-form ion-input,
+.destek-form ion-textarea {
+  --border-color: #E5E7EB;
+  --border-radius: 8px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --highlight-color: #C8A850;
+}
+
+.submit-button {
+  --background: #C8A850;
+  --background-hover: #B89740;
+  --background-activated: #B89740;
+  --border-radius: 8px;
+  margin-top: 8px;
+}
+
+.submit-button[disabled] {
+  opacity: 0.5;
+}
+
+.accordion-content {
+  padding: 16px;
+  font-size: 14px;
+  color: #6B7280;
+  line-height: 1.6;
+}
+
+ion-accordion ion-item {
+  --background: white;
+  --border-color: #E5E7EB;
+}
+
+ion-accordion-group {
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  overflow: hidden;
+}

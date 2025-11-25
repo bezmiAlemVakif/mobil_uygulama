@@ -1,0 +1,198 @@
+import React, { useRef } from 'react';
+import {
+  IonContent,
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
+  IonBackButton,
+  IonCard,
+  IonCardContent,
+  IonButton,
+  IonIcon,
+  IonText,
+  IonSpinner
+} from '@ionic/react';
+import { downloadOutline, receiptOutline } from 'ionicons/icons';
+import { useHistory, useLocation } from 'react-router-dom';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import './IslemDetayPage.css';
+
+interface Islem {
+  id: number;
+  tarih: string;
+  tur: string;
+  hastane: string;
+  doktor: string;
+  tutar: string;
+  durum: 'tamamlandi' | 'beklemede';
+  detay: string;
+}
+
+const IslemDetayPage: React.FC = () => {
+  const history = useHistory();
+  const location = useLocation<{ islem: Islem }>();
+  const islem = location.state?.islem;
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [isDownloading, setIsDownloading] = React.useState(false);
+
+  if (!islem) {
+    history.goBack();
+    return null;
+  }
+
+  const handleDownloadReport = async () => {
+    if (!contentRef.current) return;
+    
+    setIsDownloading(true);
+    try {
+      // Sayfayı canvas'a çevir
+      const canvas = await html2canvas(contentRef.current, {
+        allowTaint: true,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        scale: 2,
+        logging: false
+      });
+
+      // Canvas'tan PDF oluştur
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
+
+      const imgWidth = 210; // A4 genişliği (mm)
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const imgData = canvas.toDataURL('image/png');
+
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      // Çok sayfalı PDF için
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= 297; // A4 yüksekliği (mm)
+
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= 297;
+      }
+
+      // PDF'i indir
+      const filename = `Islem_Raporu_${islem.id}_${new Date().toISOString().split('T')[0]}.pdf`;
+      pdf.save(filename);
+
+      console.log('Rapor başarıyla indirildi:', filename);
+    } catch (error) {
+      console.error('PDF indirme hatası:', error);
+      alert('Rapor indirilirken bir hata oluştu. Lütfen tekrar deneyiniz.');
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/islemler" text="Geri" />
+          </IonButtons>
+          <IonTitle>İşlem Detayı</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent className="islem-detay-page">
+        <div className="detay-container" ref={contentRef}>
+          {/* Header */}
+          <div className="detay-header">
+            <div className="header-icon-wrapper">
+              <IonIcon icon={receiptOutline} className="header-icon" />
+            </div>
+            <h1 className="detay-title">{islem.tur}</h1>
+            <span className={`detay-status ${islem.durum}`}>
+              {islem.durum === 'tamamlandi' ? 'Tamamlandı' : 'Beklemede'}
+            </span>
+          </div>
+
+          {/* İşlem Bilgileri */}
+          <IonCard className="info-card">
+            <IonCardContent>
+              <h3 className="section-title">İşlem Bilgileri</h3>
+              
+              <div className="info-row">
+                <span className="info-label">Tarih</span>
+                <span className="info-value">{islem.tarih}</span>
+              </div>
+
+              <div className="info-row">
+                <span className="info-label">Doktor</span>
+                <span className="info-value">{islem.doktor}</span>
+              </div>
+
+              <div className="info-row">
+                <span className="info-label">Hastane</span>
+                <span className="info-value">{islem.hastane}</span>
+              </div>
+
+              <div className="info-row">
+                <span className="info-label">İşlem Türü</span>
+                <span className="info-value">{islem.tur}</span>
+              </div>
+
+              <div className="info-row highlight">
+                <span className="info-label">Tutar</span>
+                <span className="info-value amount">{islem.tutar}</span>
+              </div>
+            </IonCardContent>
+          </IonCard>
+
+          {/* Açıklama */}
+          <IonCard className="description-card">
+            <IonCardContent>
+              <h3 className="section-title">Açıklama</h3>
+              <p className="description-text">{islem.detay}</p>
+            </IonCardContent>
+          </IonCard>
+
+          {/* Rapor İndir Butonu */}
+          {islem.durum === 'tamamlandi' && (
+            <IonButton
+              expand="block"
+              className="download-button"
+              onClick={handleDownloadReport}
+              disabled={isDownloading}
+            >
+              {isDownloading ? (
+                <>
+                  <IonSpinner name="crescent" slot="start" />
+                  İndiriliyor...
+                </>
+              ) : (
+                <>
+                  <IonIcon slot="start" icon={downloadOutline} />
+                  Rapor İndir
+                </>
+              )}
+            </IonButton>
+          )}
+
+          {/* Yardım Metni */}
+          <div className="help-text">
+            <IonText color="medium">
+              <p>
+                Bu işlemle ilgili sorularınız için destek ekibimizle iletişime geçebilirsiniz.
+              </p>
+            </IonText>
+          </div>
+        </div>
+      </IonContent>
+    </IonPage>
+  );
+};
+
+export default IslemDetayPage;

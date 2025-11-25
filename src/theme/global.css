@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tab Bar Styling */
+.custom-tab-bar {
+  --background: white;
+  --border: 1px solid #E5E7EB;
+  height: 64px;
+}
+
+.custom-tab-bar ion-tab-button {
+  --color: #6B7280;
+  --color-selected: #ffffff;
+  font-weight: 500;
+}
+
+.custom-tab-bar ion-tab-button.tab-selected {
+  font-weight: 600;
+  background: #93153c;
+  border-radius: 12px 12px 0 0;
+}
+
+.custom-tab-bar ion-icon {
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+
+.custom-tab-bar ion-label {
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: inherit;
+}
+
+/* Common Card Styles */
+.ion-card {
+  margin: 16px 0;
+  border-radius: var(--radius-md);
+}
+
+/* Button Styles */
+ion-button {
+  --border-radius: var(--radius-sm);
+  text-transform: none;
+  font-weight: var(--font-semibold);
+}
+
+/* Input Styles */
+ion-input,
+ion-textarea,
+ion-select {
+  --border-radius: var(--radius-sm);
+  --padding-start: 16px;
+  --padding-end: 16px;
+}

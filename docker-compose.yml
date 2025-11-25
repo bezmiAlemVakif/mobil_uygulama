@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  android-builder:
+    build: .
+    platform: "linux/amd64"
+    image: odemeapp-android-builder:latest
+    ports:
+      - "5174:5173"
+    volumes:
+      - ./:/workspace
+      - android-sdk:/opt/android-sdk
+    working_dir: /workspace
+    tty: true
+    environment:
+      - ANDROID_SDK_ROOT=/opt/android-sdk
+    command: bash -lc "npm install --no-audit --no-fund && npm run dev -- --host 0.0.0.0 --port 5173"
+    # optional: map uid/gid if you need file ownership returned to host
+
+volumes:
+  android-sdk:
+    driver: local
